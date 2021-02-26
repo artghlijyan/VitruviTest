@@ -1,0 +1,5 @@
+{
+	"ConnectionStrings": {
+		"SqlConnection": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=VitruviTest;Integrated Security=True;"
+	}
+}
