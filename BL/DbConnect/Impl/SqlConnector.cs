@@ -1,19 +1,24 @@
 ﻿using AutoMapper;
-using BL.DbConnect;
 using BL.DTO;
+using BLl.DbConnect;
 using Dal.DbContext;
-using Dal.DbContext.MsSql;
 using Dal.Models;
 using System.Threading.Tasks;
 
-namespace BL.Impl.DbConnect
+namespace BLl.Impl.DbConnect
 {
-    public class DbConnector : IDbConnector
+    public class SqlConnector : IDbConnector
     {
+        private IDbContext _context;
+
+        public SqlConnector(IDbContext context)
+        {
+            _context = context;
+        }
+
         public async Task<ProviderGroupDto> GetProviderGroupsAsync()
         {
-            IDbContext context = new SqlContext();
-            ProviderGroup providerGroup = await Task.Run(() => context.GetProviderGroups());
+            var providerGroup = await Task.Run(() => _context.GetProviderGroups());
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -26,7 +31,5 @@ namespace BL.Impl.DbConnect
 
             return mapper.Map<ProviderGroupDto>(providerGroup);
         }
-
-
     }
 }

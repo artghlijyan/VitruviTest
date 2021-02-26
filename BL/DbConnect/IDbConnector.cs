@@ -1,7 +1,7 @@
 ﻿using BL.DTO;
 using System.Threading.Tasks;
 
-namespace BL.DbConnect
+namespace BLl.DbConnect
 {
     public interface IDbConnector
     {

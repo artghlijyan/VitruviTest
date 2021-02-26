@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using BL.DbConnect;
+using BL.DTO;
+using BLl.DbConnect;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VitruviTest.Controllers;
-using VitruviTest.Models;
 using VitruviTest.ViewModels;
 using Xunit;
 
@@ -19,9 +19,7 @@ namespace Test
             var mockDbConnector = new Mock<IDbConnector>();
             var mockMapper = new Mock<IMapper>();
 
-            var mockDbResult = mockDbConnector.Setup(db => db.GetProviderGroupsAsync());
-            var mockMapperResult = mockMapper.Setup(
-                mapper => mapper.Map<ProviderGroupModel>(mockDbResult));
+            var mockDbResult = mockDbConnector.Setup(db => db.GetProviderGroupsAsync()).Returns(GetProviderGroupsAsync);
 
             HomeController controller = new HomeController(mockDbConnector.Object, mockMapper.Object);
 
@@ -30,33 +28,36 @@ namespace Test
             var viewResult = Assert.IsType<ViewResult>(result);
             var model = Assert.IsAssignableFrom<ProviderGroupModel>(viewResult.Model);
 
-            Assert.Equal(GetProviderGroupModel().groupNames.Count,
+            Assert.Equal(GetProviderGroupsAsync().Result.groupNames.Count,
                 model.groupNames.Count);
-            Assert.Equal(GetProviderGroupModel().providerNames.Count,
+            Assert.Equal(GetProviderGroupsAsync().Result.providerNames.Count,
                 model.providerNames.Count);
         }
 
-        private ProviderGroupModel GetProviderGroupModel()
+        private async Task<ProviderGroupDto> GetProviderGroupsAsync()
         {
-            var pGroup = new ProviderGroupModel();
+            var pGroup = new ProviderGroupDto();
 
-            pGroup.groupNames = new List<GroupModel>()
+            pGroup.groupNames = new List<GroupDto>()
                 {
-                    new GroupModel(),
-                    new GroupModel(),
-                    new GroupModel(),
-                    new GroupModel(),
-                    new GroupModel(),
+                    new GroupDto(),
+                    new GroupDto(),
+                    new GroupDto(),
+                    new GroupDto(),
+                    new GroupDto(),
+                    new GroupDto(),
+
                 };
 
-            pGroup.providerNames = new List<ProviderModel>()
+            pGroup.providerNames = new List<ProviderDto>()
                 {
-                    new ProviderModel(),
-                    new ProviderModel(),
-                    new ProviderModel(),
-                    new ProviderModel(),
-                    new ProviderModel(),
-                    new ProviderModel(),
+                    new ProviderDto(),
+                    new ProviderDto(),
+                    new ProviderDto(),
+                    new ProviderDto(),
+                    new ProviderDto(),
+                    new ProviderDto(),
+
                 };
 
             return pGroup;
