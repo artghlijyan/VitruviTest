@@ -22,8 +22,9 @@ namespace BLl.Impl.DbConnect
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Provider, ProviderDto>();
                 cfg.CreateMap<Group, GroupDto>();
+                cfg.CreateMap<Provider, ProviderDto>();
+                cfg.CreateMap<ProviderType, ProviderTypeDto>();
                 cfg.CreateMap<ProviderGroup, ProviderGroupDto>();
             });
 

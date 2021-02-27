@@ -4,7 +4,8 @@ namespace BL.DTO
 {
     public class ProviderGroupDto
     {
-        public List<ProviderDto> providerNames { get; set; }
-        public List<GroupDto> groupNames { get; set; }
+        public List<ProviderDto> Providers { get; set; }
+        public List<GroupDto> Groups { get; set; }
+        public List<ProviderTypeDto> ProviderTypes { get; set; }
     }
 }

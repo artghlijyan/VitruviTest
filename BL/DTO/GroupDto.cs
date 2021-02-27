@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public TypeDto Type { get; set; }
+        public ProviderTypeDto ProviderType { get; set; }
     }
 }

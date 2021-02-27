@@ -28,17 +28,17 @@ namespace Test
             var viewResult = Assert.IsType<ViewResult>(result);
             var model = Assert.IsAssignableFrom<ProviderGroupModel>(viewResult.Model);
 
-            Assert.Equal(GetProviderGroupsAsync().Result.groupNames.Count,
-                model.groupNames.Count);
-            Assert.Equal(GetProviderGroupsAsync().Result.providerNames.Count,
-                model.providerNames.Count);
+            Assert.Equal(GetProviderGroupsAsync().Result.Groups.Count,
+                model.Groups.Count);
+            Assert.Equal(GetProviderGroupsAsync().Result.Providers.Count,
+                model.Providers.Count);
         }
 
         private async Task<ProviderGroupDto> GetProviderGroupsAsync()
         {
             var pGroup = new ProviderGroupDto();
 
-            pGroup.groupNames = new List<GroupDto>()
+            pGroup.Groups = new List<GroupDto>()
                 {
                     new GroupDto(),
                     new GroupDto(),
@@ -46,10 +46,9 @@ namespace Test
                     new GroupDto(),
                     new GroupDto(),
                     new GroupDto(),
-
                 };
 
-            pGroup.providerNames = new List<ProviderDto>()
+            pGroup.Providers = new List<ProviderDto>()
                 {
                     new ProviderDto(),
                     new ProviderDto(),
@@ -57,8 +56,17 @@ namespace Test
                     new ProviderDto(),
                     new ProviderDto(),
                     new ProviderDto(),
-
                 };
+
+            pGroup.ProviderTypes = new List<ProviderTypeDto>
+            {
+                new ProviderTypeDto(),
+                new ProviderTypeDto(),
+                new ProviderTypeDto(),
+                new ProviderTypeDto(),
+                new ProviderTypeDto(),
+                new ProviderTypeDto(),
+            };
 
             return pGroup;
         }

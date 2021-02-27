@@ -5,7 +5,8 @@ namespace VitruviTest.ViewModels
 {
     public class ProviderGroupModel
     {
-        public List<GroupModel> groupNames { get; set; }
-        public List<ProviderModel> providerNames { get; set; }
+        public List<GroupModel> Groups { get; set; }
+        public List<ProviderModel> Providers { get; set; }
+        public List<ProviderTypeModel> ProviderTypes { get; set; }
     }
 }

@@ -26,18 +26,22 @@
 	<h2>Provider Groups</h2>
 	<table>
 		<tr>
-			<th>Groups</th>
-			<th>Providers</th>
+			<th>Group</th>
+			<th>Provider</th>
+			<th>Type</th>
 		</tr>
 
-		@for (int i = 0; i < Model.groupNames.Count; i++)
+		@for (int i = 0; i < Model.Groups.Count; i++)
 		{
 			<tr>
 				<td>
-					@Model.groupNames[i].Name
+					@Model.Groups[i].Name
 				</td>
 				<td>
-					@Model.providerNames[i].Name
+					@Model.Providers[i].Name
+				</td>
+				<td>
+					@Model.ProviderTypes[i].Name
 				</td>
 			</tr>
 		}

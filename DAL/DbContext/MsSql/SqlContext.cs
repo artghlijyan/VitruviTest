@@ -17,14 +17,14 @@ namespace Dal.DbContext.MsSql
                 GetConnectionString("SqlConnection");
         }
 
-
         public ProviderGroup GetProviderGroups()
         {
             string procName = "sp_GetProviderGroups";
 
             var pGroup = new ProviderGroup();
-            pGroup.groupNames = new List<Group>();
-            pGroup.providerNames = new List<Provider>();
+            pGroup.Groups = new List<Group>();
+            pGroup.Providers = new List<Provider>();
+            pGroup.ProviderTypes = new List<ProviderType>();
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -41,12 +41,15 @@ namespace Dal.DbContext.MsSql
                         {
                             var group = new Group();
                             var provider = new Provider();
+                            var providerType = new ProviderType();
 
                             group.Name = (string)reader["GroupName"];
                             provider.Name = (string)reader["ProviderName"];
+                            providerType.Name = (string)reader["TypeName"];
 
-                            pGroup.groupNames.Add(group);
-                            pGroup.providerNames.Add(provider);
+                            pGroup.Groups.Add(group);
+                            pGroup.Providers.Add(provider);
+                            pGroup.ProviderTypes.Add(providerType);
                         }
                     }
                 }
