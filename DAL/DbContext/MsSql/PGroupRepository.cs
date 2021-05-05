@@ -1,20 +1,18 @@
 ﻿using Dal.Models;
-using Microsoft.Extensions.Configuration;
+using DAL.DbContext.SqlContext;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace Dal.DbContext.MsSql
 {
-    public class SqlContext : IDbContext
+    public class PGroupRepository : IRepository<ProviderGroup>
     {
-        private string ConnectionString { get; }
+        private SqlContext _sqlContext;
 
-        public SqlContext()
+        public PGroupRepository()
         {
-            ConnectionString = new ConfigurationBuilder().
-                AddJsonFile("DbConfig.json").Build().
-                GetConnectionString("SqlConnection");
+            _sqlContext = new SqlContext();
         }
 
         public ProviderGroup GetProviderGroups()
@@ -26,7 +24,7 @@ namespace Dal.DbContext.MsSql
             pGroup.Providers = new List<Provider>();
             pGroup.ProviderTypes = new List<ProviderType>();
 
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_sqlContext.ConnectionString))
             {
                 if (connection.State == ConnectionState.Closed)
                 {

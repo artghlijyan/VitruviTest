@@ -1,28 +1,9 @@
-﻿using Dal.Models;
+﻿using System;
 
-namespace Dal.DbContext
+namespace DAL.DbContext
 {
     public interface IDbContext
     {
-        #region Get
-
-        public ProviderGroup GetProviderGroups();
-
-        #endregion
-
-        #region Insert
-        // some code
-
-        #endregion
-
-        #region Update
-        // some code
-
-        #endregion
-
-        #region Delete
-        // some code
-
-        #endregion
+        public string ConnectionString { get; }
     }
 }

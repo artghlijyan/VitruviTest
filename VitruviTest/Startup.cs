@@ -2,6 +2,7 @@ using BLl.DbConnect;
 using BLl.Impl.DbConnect;
 using Dal.DbContext;
 using Dal.DbContext.MsSql;
+using Dal.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,6 @@ namespace Dal
             services.AddControllersWithViews();
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IDbConnector, SqlConnector>();
-            services.AddScoped<IDbContext, SqlContext>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

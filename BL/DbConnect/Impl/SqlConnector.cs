@@ -2,6 +2,7 @@
 using BL.DTO;
 using BLl.DbConnect;
 using Dal.DbContext;
+using Dal.DbContext.MsSql;
 using Dal.Models;
 using System.Threading.Tasks;
 
@@ -9,16 +10,16 @@ namespace BLl.Impl.DbConnect
 {
     public class SqlConnector : IDbConnector
     {
-        private IDbContext _context;
+        private IRepository<ProviderGroup> _pRepo;
 
-        public SqlConnector(IDbContext context)
+        public SqlConnector()
         {
-            _context = context;
+            _pRepo = new PGroupRepository();
         }
 
         public async Task<ProviderGroupDto> GetProviderGroupsAsync()
         {
-            var providerGroup = await Task.Run(() => _context.GetProviderGroups());
+            var providerGroup = await Task.Run(() => _pRepo.GetProviderGroups());
 
             var config = new MapperConfiguration(cfg =>
             {
