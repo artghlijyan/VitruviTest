@@ -12,9 +12,9 @@ namespace BLl.Impl.DbConnect
     {
         private IRepository<ProviderGroup> _pRepo;
 
-        public SqlConnector()
+        public SqlConnector(IRepository<ProviderGroup> pRepo)
         {
-            _pRepo = new PGroupRepository();
+            _pRepo = pRepo;
         }
 
         public async Task<ProviderGroupDto> GetProviderGroupsAsync()
